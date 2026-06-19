@@ -1,0 +1,1576 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ancorar Kids — Kit digital com +30 atividades de inteligência emocional para crianças atípicas de 6 a 12 anos.">
+  <title>Ancorar Kids — Diário de Emoções da Criança Atípica</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="img/icons/manifest.json">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #FDFCF8;
+      --sage:      #E8EFE8;
+      --lavender:  #EFEDF4;
+      --coral:     #FFB7B2;
+      --coral-dk:  #C46058;
+      --coral-lt:  #FFE4E1;
+      --lav-lt:    #E6E6FA;
+      --text:      #292524;
+      --muted:     #78716C;
+      --s50:       #FAFAF9;
+      --s100:      #F5F5F4;
+      --s200:      #E7E5E4;
+      --white:     #ffffff;
+      --green:     #4A7A56;
+
+      --f-sans: 'Outfit', sans-serif;
+      --f-hand: 'Reenie Beanie', cursive;
+
+      --r-sm:  1rem;
+      --r-md:  1.5rem;
+      --r-lg:  2rem;
+      --r-xl:  2.5rem;
+      --r-2xl: 3rem;
+
+      --sh:    0 4px 20px -2px rgba(0,0,0,.05);
+      --sh-md: 0 8px 32px -4px rgba(41,37,36,.10);
+      --sh-lg: 0 16px 48px -8px rgba(41,37,36,.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img  { max-width: 100%; height: auto; display: block; }
+    a    { color: var(--coral-dk); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--f-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--f-sans);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+    }
+    .grain svg { width: 100%; height: 100%; display: block; }
+
+    .container        { width: 100%; max-width: 760px; margin-inline: auto; padding-inline: 22px; }
+    .container--wide  { max-width: 960px; }
+
+    section { padding: 72px 0; }
+
+    .section-title {
+      font-size: clamp(1.65rem, 4vw, 2.3rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      text-align: center;
+      margin-bottom: 36px;
+      line-height: 1.2;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+      transition-delay: var(--d, 0s);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    @keyframes blob-up   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes blob-down { 0%,100%{transform:translateY(0)} 50%{transform:translateY( 10px)} }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--coral);
+      color: var(--text);
+      font-family: var(--f-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      text-decoration: none;
+      padding: 16px 38px;
+      border-radius: 9999px;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 20px -2px rgba(255,183,178,.50);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px -2px rgba(255,183,178,.65);
+      text-decoration: none;
+      color: var(--text);
+    }
+    .btn-cta:active { transform: translateY(0); }
+    .btn-cta--full  { width: 100%; text-align: center; font-size: 1.05rem; padding: 18px 48px; }
+
+    .cta-microcopy {
+      display: block;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 11px;
+    }
+
+    .hand {
+      font-family: var(--f-hand);
+      font-style: normal;
+      font-size: 1.22em;
+      color: var(--coral-dk);
+      display: inline-block;
+      transform: rotate(-2deg) translateY(5px);
+      line-height: .85;
+    }
+
+    .img-placeholder {
+      background: var(--s100);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 24px;
+      border: 2px dashed var(--s200);
+    }
+
+    .hero {
+      padding: 80px 0 88px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .hero__blob--1 {
+      width: min(520px,85vw); height: min(520px,85vw);
+      background: var(--coral-lt); opacity: .60;
+      top: -18%; right: -12%;
+      animation: blob-up 6s ease-in-out infinite;
+    }
+    .hero__blob--2 {
+      width: min(420px,75vw); height: min(420px,75vw);
+      background: var(--lav-lt); opacity: .60;
+      bottom: -14%; left: -10%;
+      animation: blob-down 6s ease-in-out infinite;
+      animation-delay: 3s;
+    }
+
+    .hero__content {
+      position: relative; z-index: 1;
+      max-width: 960px;
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+    .hero__text   { flex: 1; min-width: 0; }
+    .hero__visual { flex-shrink: 0; width: 360px; }
+
+    @media (max-width: 740px) {
+      .hero__content { flex-direction: column; gap: 36px; }
+      .hero__visual  { width: 100%; }
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px; font-weight: 600;
+      color: var(--muted); letter-spacing: .06em; text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--s200);
+      margin-bottom: 28px;
+    }
+    .hero__badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--coral); border-radius: 50%;
+    }
+
+    .hero__headline {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -.025em;
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+
+    .hero__subheadline {
+      font-size: clamp(.97rem, 2vw, 1.08rem);
+      color: var(--muted);
+      margin: 0 0 38px;
+      line-height: 1.75;
+      font-weight: 400;
+    }
+
+    .hero .cta-microcopy { text-align: left; }
+
+    .hero__mockup {
+      width: 100%;
+      border-radius: var(--r-xl);
+      object-fit: cover;
+    }
+
+    .pain__list {
+      list-style: none;
+      display: flex; flex-direction: column;
+      gap: 13px; margin-bottom: 40px;
+    }
+    .pain__list li {
+      background: var(--white);
+      border-radius: var(--r-md);
+      box-shadow: var(--sh);
+      border: 1px solid rgba(41,37,36,.04);
+      padding: 16px 22px;
+      font-size: 1rem; line-height: 1.55;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+
+    .pain__transition {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .pain__reassurance {
+      background: var(--coral-lt);
+      border-radius: var(--r-xl);
+      padding: 30px 34px;
+      text-align: center;
+      font-size: 1.04rem;
+      line-height: 1.75;
+      box-shadow: var(--sh);
+    }
+    .pain__reassurance strong { color: var(--coral-dk); font-weight: 700; }
+
+    .solution { background: var(--s50); }
+
+    .solution__intro {
+      text-align: center;
+      font-size: 1.04rem;
+      color: var(--muted);
+      max-width: 630px;
+      margin: 0 auto 48px;
+      line-height: 1.8;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 580px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+
+    .pillar {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh);
+      border: 1px solid rgba(41,37,36,.04);
+      padding: 30px 22px 26px;
+      text-align: center;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .pillar:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
+
+    .pillar__icon  { font-size: 2rem; margin-bottom: 14px; }
+    .pillar__title { font-size: 1rem; font-weight: 700; margin-bottom: 9px; letter-spacing: -.01em; }
+    .pillar__text  { font-size: .875rem; color: var(--muted); line-height: 1.62; }
+
+    .transform__cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    @media (min-width: 580px) { .transform__cols { grid-template-columns: 1fr 1fr; } }
+
+    .transform__col-inner {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh);
+      border: 1px solid rgba(41,37,36,.04);
+      padding: 28px 24px;
+    }
+
+    .transform__col-title {
+      font-size: 1rem; font-weight: 700;
+      color: var(--coral-dk);
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--s200);
+    }
+
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .check-list li {
+      display: flex; gap: 11px; align-items: flex-start;
+      font-size: .97rem; line-height: 1.5;
+    }
+    .check-list li::before {
+      content: '✓';
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--green);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .transform__cta { text-align: center; }
+
+    .emotional-section { background: #FFF5F4; }
+
+    .emotional__card {
+      background: var(--white);
+      border-radius: var(--r-2xl);
+      box-shadow: var(--sh-md);
+      padding: 52px 40px 48px;
+      text-align: center;
+    }
+    .emotional__card .section-title { color: var(--coral-dk); }
+    .emotional__text {
+      font-size: 1.04rem;
+      color: var(--muted);
+      line-height: 1.82;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .comparison__cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 48px;
+    }
+    @media (min-width: 560px) { .comparison__cols { grid-template-columns: 1fr 1fr; } }
+
+    .comparison__col {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh);
+    }
+    .comparison__col--sem { background: #FFF0EF; }
+    .comparison__col--com { background: #F0FBF2; }
+
+    .comparison__col-header {
+      padding: 14px 22px;
+      font-size: .9rem; font-weight: 700;
+      letter-spacing: -.01em;
+      text-align: center;
+      border-bottom: 1px solid rgba(41,37,36,.06);
+    }
+    .comparison__col--sem .comparison__col-header { background: #FFD9D6; color: #9B3F3A; }
+    .comparison__col--com .comparison__col-header { background: #C8F0D4; color: #2A6B3C; }
+
+    .comparison__col ul {
+      list-style: none;
+      padding: 18px 22px;
+      display: flex; flex-direction: column; gap: 13px;
+    }
+    .comparison__col ul li {
+      font-size: .95rem; line-height: 1.5;
+      padding-left: 22px; position: relative;
+    }
+    .comparison__col--sem ul li::before {
+      content: '✗'; position: absolute; left: 0;
+      color: #C45552; font-weight: 700;
+    }
+    .comparison__col--com ul li::before {
+      content: '✓'; position: absolute; left: 0;
+      color: #2A6B3C; font-weight: 700;
+    }
+
+    .comparison__cta { text-align: center; }
+
+    .contents { background: var(--s50); }
+
+    .contents__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .contents__item {
+      background: var(--white);
+      border-radius: var(--r-sm);
+      box-shadow: var(--sh);
+      border: 1px solid rgba(41,37,36,.04);
+      padding: 11px 15px;
+      font-size: .875rem; font-weight: 500;
+      display: flex; align-items: center; gap: 9px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .contents__item:hover { transform: translateY(-2px); box-shadow: var(--sh-md); }
+    .contents__item::before {
+      content: '✦';
+      font-size: .8rem;
+      color: var(--coral);
+      flex-shrink: 0;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--r-lg);
+      margin-top: 8px;
+    }
+    .carousel__track {
+      display: flex;
+      gap: 16px;
+      transition: transform .4s ease;
+    }
+    .carousel__slide {
+      flex: 0 0 calc(33.333% - 11px);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: var(--sh-md);
+    }
+    @media (max-width: 640px) {
+      .carousel__slide { flex: 0 0 calc(50% - 8px); }
+    }
+    @media (max-width: 400px) {
+      .carousel__slide { flex: 0 0 100%; }
+    }
+    .carousel__slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .carousel__controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .carousel__btn {
+      background: var(--white);
+      border: 1px solid var(--s200);
+      border-radius: 9999px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text);
+      box-shadow: var(--sh);
+      transition: background .15s, transform .15s;
+    }
+    .carousel__btn:hover { background: var(--coral-lt); transform: scale(1.05); }
+    .carousel__dots {
+      display: flex; gap: 6px;
+    }
+    .carousel__dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--s200);
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .carousel__dot.active {
+      background: var(--coral-dk);
+      transform: scale(1.25);
+    }
+
+    .bonus { background: var(--lavender); }
+
+    .bonus__card {
+      background: var(--white);
+      border-radius: var(--r-2xl);
+      box-shadow: var(--sh-md);
+      padding: 44px 32px 40px;
+      text-align: center;
+    }
+
+    .bonus__tag {
+      display: inline-block;
+      background: var(--coral);
+      color: var(--text);
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+
+    .bonus__name {
+      font-size: 1.55rem; font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .bonus__text {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    .offer {
+      position: relative;
+      overflow: hidden;
+    }
+    .offer__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .offer__blob--1 {
+      width: 400px; height: 400px;
+      background: var(--coral-lt); opacity: .40;
+      top: -100px; right: 5%;
+      animation: blob-up 7s ease-in-out infinite;
+    }
+    .offer__blob--2 {
+      width: 350px; height: 350px;
+      background: var(--lav-lt); opacity: .40;
+      bottom: -80px; left: 5%;
+      animation: blob-down 7s ease-in-out infinite;
+      animation-delay: 3.5s;
+    }
+
+    .offer__card {
+      position: relative; z-index: 1;
+      background: var(--white);
+      border-radius: var(--r-2xl);
+      box-shadow: var(--sh-lg);
+      padding: 52px 36px 48px;
+      text-align: center;
+    }
+
+    .offer__checklist {
+      list-style: none;
+      text-align: left;
+      max-width: 500px;
+      margin: 0 auto 40px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .offer__checklist li {
+      display: flex; gap: 13px; align-items: flex-start;
+      font-size: 1rem; line-height: 1.5;
+    }
+    .offer__checklist .check {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .offer__anchor {
+      font-size: .97rem; color: var(--muted);
+      line-height: 1.65; margin-bottom: 20px;
+    }
+    .offer__anchor s { color: var(--coral-dk); opacity: .7; }
+
+    .offer__urgency {
+      display: inline-block;
+      color: var(--coral-dk);
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .07em;
+      padding: 7px 20px;
+      border-radius: 9999px;
+      border: 1.5px solid var(--coral);
+      margin-bottom: 26px;
+    }
+
+    .offer__price {
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: var(--coral-dk);
+      line-height: 1.05;
+      margin-bottom: 6px;
+    }
+    .offer__price-alt {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .offer__price-alt strong { color: var(--text); font-weight: 700; }
+
+    .reviews { background: var(--s50); }
+
+    .reviews__carousel {
+      position: relative;
+      overflow: hidden;
+    }
+    .reviews__track {
+      display: flex;
+      gap: 16px;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+    }
+    .review-card {
+      flex: 0 0 calc(33.333% - 11px);
+      background: var(--white);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh);
+      border: 1px solid rgba(41,37,36,.04);
+      padding: 24px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    @media (max-width: 680px) { .review-card { flex: 0 0 calc(50% - 8px); } }
+    @media (max-width: 440px) { .review-card { flex: 0 0 100%; } }
+
+    .review-card__stars { color: #F59E0B; font-size: .95rem; letter-spacing: 1px; }
+    .review-card__text  { font-size: .9rem; color: var(--muted); line-height: 1.65; flex: 1; }
+    .review-card__author { font-size: .82rem; font-weight: 600; color: var(--text); }
+
+    .reviews__controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .reviews__btn {
+      background: var(--white);
+      border: 1px solid var(--s200);
+      border-radius: 9999px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text);
+      box-shadow: var(--sh);
+      transition: background .15s, transform .15s;
+    }
+    .reviews__btn:hover { background: var(--coral-lt); transform: scale(1.06); }
+    .reviews__dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .reviews__dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--s200);
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .reviews__dot.active { background: var(--coral-dk); transform: scale(1.3); }
+
+    .guarantee__inner {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 30px; text-align: center;
+    }
+    @media (min-width: 580px) {
+      .guarantee__inner { flex-direction: row; text-align: left; gap: 40px; }
+    }
+
+    .guarantee__badge-placeholder {
+      flex-shrink: 0;
+      width: 136px; height: 136px;
+      background: var(--coral-lt);
+      border-radius: 50%;
+      box-shadow: 0 0 0 8px rgba(255,183,178,.15), var(--sh);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; font-weight: 600;
+      color: var(--coral-dk);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .guarantee__title { font-size: 1.5rem; margin-bottom: 12px; letter-spacing: -.02em; }
+    .guarantee__text  { font-size: .98rem; color: var(--muted); line-height: 1.78; }
+
+    .faq { background: var(--s50); }
+
+    .faq__list {
+      max-width: 680px;
+      margin-inline: auto;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .faq__item {
+      background: var(--white);
+      border: 1px solid var(--s100);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+
+    .faq__q {
+      width: 100%; background: none; border: none;
+      text-align: left; padding: 22px;
+      font-family: var(--f-sans); font-size: .97rem; font-weight: 600;
+      color: var(--text); cursor: pointer;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      transition: background .15s;
+      line-height: 1.4;
+    }
+    .faq__q:hover { background: var(--s50); }
+    .faq__q[aria-expanded="true"] { background: var(--s50); color: var(--coral-dk); }
+
+    .faq__icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      background: var(--s100); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; line-height: 1; color: var(--muted);
+      transition: transform .35s ease, background .15s;
+    }
+    .faq__q[aria-expanded="true"] .faq__icon {
+      transform: rotate(45deg);
+      background: var(--coral); color: var(--text);
+    }
+
+    .faq__answer { max-height: 0; overflow: hidden; transition: max-height .5s ease-in-out; }
+    .faq__answer-inner {
+      padding: 0 22px 22px;
+      font-size: .94rem; color: var(--muted); line-height: 1.72;
+    }
+
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,.72);
+      text-align: center;
+      padding: 56px 20px;
+    }
+
+    .footer__brand  { font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 14px; letter-spacing: -.01em; }
+    .footer__about  { font-size: .87rem; line-height: 1.78; max-width: 490px; margin: 0 auto 28px; opacity: .72; }
+
+    .footer__contact { font-size: .82rem; margin-bottom: 18px; }
+    .footer__contact a { color: rgba(255,255,255,.50); text-decoration: underline; }
+    .footer__contact a:hover { color: rgba(255,255,255,.8); }
+    .footer__links  { font-size: .78rem; margin-bottom: 14px; }
+    .footer__links a { color: rgba(255,255,255,.40); margin: 0 8px; text-decoration: underline; }
+    .footer__links a:hover { color: rgba(255,255,255,.75); }
+    .footer__copyright { font-size: .74rem; color: rgba(255,255,255,.28); margin-bottom: 12px; }
+    .footer__disclaimer {
+      font-size: .72rem; color: rgba(255,255,255,.25);
+      max-width: 520px; margin: 0 auto; line-height: 1.65;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 720px;
+      z-index: 200;
+    }
+    .navbar__inner {
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 9999px;
+      height: 52px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(255,255,255,.90);
+      box-shadow: 0 4px 20px -2px rgba(41,37,36,.08);
+      overflow: hidden;
+    }
+    .navbar__logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .navbar__logo-img {
+      height: 75px;
+      margin-top: 12px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .navbar__logo-name {
+      font-size: 15px; font-weight: 600;
+      color: var(--text); letter-spacing: -.01em;
+      margin-left: -14px;
+    }
+    .navbar__logo:hover .navbar__logo-name { color: var(--coral-dk); }
+    .navbar__links { display: none; gap: 24px; }
+    @media (min-width: 580px) { .navbar__links { display: flex; } }
+    .navbar__links a {
+      font-size: 14px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      transition: color .15s;
+    }
+    .navbar__links a:hover { color: var(--text); }
+    .navbar__cta {
+      background: var(--text); color: var(--white) !important;
+      font-size: 13px; font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      text-decoration: none;
+      white-space: nowrap; flex-shrink: 0;
+      transition: opacity .15s;
+    }
+    .navbar__cta:hover { opacity: .78; text-decoration: none; }
+    body { padding-top: 88px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+      .reveal { opacity:1; transform:none; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 48px 0; }
+      .hero { padding: 44px 0 52px; }
+
+      .offer__card    { padding: 36px 22px 32px; }
+      .emotional__card{ padding: 36px 22px 32px; }
+      .bonus__card    { padding: 32px 20px 28px; }
+
+      .guarantee__badge-placeholder { width: 100px; height: 100px; font-size: .75rem; }
+
+      .section-title { margin-bottom: 24px; }
+
+      .offer__checklist { margin-bottom: 28px; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 40px 0; }
+      .hero { padding: 36px 0 44px; }
+
+      .container { padding-inline: 16px; }
+
+      .navbar__logo-name { display: none; }
+
+      .hero__badge { font-size: 10px; padding: 5px 12px; }
+
+      .contents__grid { grid-template-columns: 1fr; }
+
+      .offer__card { padding: 28px 16px 24px; }
+      .offer__price { font-size: 2.2rem; }
+      .offer__urgency { font-size: .72rem; padding: 6px 14px; }
+
+      .btn-cta { padding: 14px 26px; font-size: .95rem; }
+      .btn-cta--full { padding: 16px 20px; }
+
+      .faq__q { padding: 16px; font-size: .9rem; }
+      .faq__answer-inner { padding: 0 16px 16px; }
+
+      .pain__reassurance { padding: 22px 18px; }
+
+      .review-card { padding: 18px 16px 14px; }
+
+      .carousel__btn,
+      .reviews__btn { width: 32px; height: 32px; font-size: .85rem; }
+
+      footer { padding: 40px 16px; }
+
+      .footer__about { margin-bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" aria-label="Navegação principal">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo" aria-label="Ancorar Kids — início">
+        <img src="images/logo.png" alt="" aria-hidden="true" class="navbar__logo-img">
+        <span class="navbar__logo-name">Ancorar Kids</span>
+      </a>
+      <div class="navbar__links">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#conteudo">Conteúdo</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="https://pay.cakto.com.br/9k9np4x_928485" class="navbar__cta">Quero o kit</a>
+    </div>
+  </nav>
+
+  <div class="grain" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <filter id="grain-f">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"></feTurbulence>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#grain-f)"></rect>
+    </svg>
+  </div>
+
+  <section class="hero">
+    <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+    <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+
+    <div class="container hero__content">
+      <div class="hero__text">
+        <span class="hero__badge reveal in">Baseado em psicologia infantil e neurociência</span>
+
+        <h1 class="hero__headline reveal in" style="--d:.08s">
+          Seu filho sente tudo intensamente.<br>
+          Ele só precisa de um lugar <em class="hand">seguro</em><br>
+          para entender o que sente.
+        </h1>
+
+        <p class="hero__subheadline reveal in" style="--d:.18s">
+          Um hábito de 5 minutos por dia que ajuda crianças atípicas de 6 a 12 anos a nomear emoções,
+          se acalmar com mais facilidade e se conectar de verdade com você.
+        </p>
+
+        <div class="reveal in" style="--d:.26s">
+          <a href="https://pay.cakto.com.br/9k9np4x_928485" class="btn-cta">QUERO AJUDAR MEU FILHO</a>
+          <span class="cta-microcopy">Material digital em PDF • Acesso imediato • 6 a 12 anos</span>
+        </div>
+      </div>
+
+      <div class="hero__visual reveal in" style="--d:.32s">
+        <img src="images/capa.png" alt="Capa do Kit Ancorar Kids" class="hero__mockup">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title reveal in">Você já passou por isso?</h2>
+
+      <ul class="pain__list">
+        <li class="reveal" style="--d:.04s">😰 Seu filho explode ou se fecha completamente, e você fica sem saber o que fazer.</li>
+        <li class="reveal" style="--d:.10s">💬 Você tenta conversar, mas ele não consegue colocar em palavras o que está sentindo.</li>
+        <li class="reveal" style="--d:.16s">😩 Cada crise deixa vocês dois esgotados — e o dia mal começou.</li>
+        <li class="reveal" style="--d:.22s">📚 Você lê, pesquisa, tenta de tudo… e ainda assim sente que não é suficiente.</li>
+      </ul>
+
+      <p class="pain__transition reveal">
+        "E no silêncio da noite, fica aquela pergunta: 'Será que estou fazendo certo?'"
+      </p>
+
+      <div class="pain__reassurance reveal">
+        <strong>Respira.</strong> Você não está falhando. Você só ainda não tinha as ferramentas certas
+        — e é exatamente isso que você vai receber agora.
+      </div>
+    </div>
+  </section>
+
+  <section class="solution" id="como-funciona">
+    <div class="container">
+      <h2 class="section-title reveal">Conheça o Ancorar Kids</h2>
+
+      <p class="solution__intro reveal">
+        O Ancorar Kids não é "só mais um PDF". São mais de 30 atividades cuidadosamente desenvolvidas
+        com base em práticas validadas pela psicologia infantil, que ensinam a criança neurodivergente
+        — no ritmo dela e do jeito dela — a reconhecer, nomear e expressar emoções. Em poucos minutos
+        por dia, brincando, seu filho constrói a segurança emocional que vai carregar para a vida toda.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar reveal" style="--d:.04s">
+          <div class="pillar__icon">🔬</div>
+          <h3 class="pillar__title">Aprovado pela ciência</h3>
+          <p class="pillar__text">
+            Atividades fundamentadas em pesquisas de psicologia e neurociência aplicadas ao
+            desenvolvimento infantil atípico.
+          </p>
+        </div>
+        <div class="pillar reveal" style="--d:.12s">
+          <div class="pillar__icon">🎨</div>
+          <h3 class="pillar__title">Divertido e fácil de aplicar</h3>
+          <p class="pillar__text">
+            Nada de tarefas chatas: são atividades lúdicas que a criança sente como brincadeira,
+            não como obrigação.
+          </p>
+        </div>
+        <div class="pillar reveal" style="--d:.20s">
+          <div class="pillar__icon">🌱</div>
+          <h3 class="pillar__title">Resultados no dia a dia</h3>
+          <p class="pillar__text">
+            Menos crises, mais conversas. A transformação aparece nos pequenos momentos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title reveal">Com o Ancorar Kids, seu filho começa a:</h2>
+
+      <div class="transform__cols">
+        <div class="reveal" style="--d:.06s">
+          <div class="transform__col-inner">
+            <p class="transform__col-title">Seu filho começa a:</p>
+            <ul class="check-list">
+              <li>Identificar o que sente</li>
+              <li>Se acalmar com mais facilidade</li>
+              <li>Se expressar melhor</li>
+              <li>Desenvolver autoconfiança</li>
+              <li>Se sentir emocionalmente seguro</li>
+              <li>Fortalecer o vínculo com você</li>
+            </ul>
+          </div>
+        </div>
+        <div class="reveal" style="--d:.14s">
+          <div class="transform__col-inner">
+            <p class="transform__col-title">E você começa a:</p>
+            <ul class="check-list">
+              <li>Entender o que acontece por trás das crises</li>
+              <li>Reagir com mais calma e segurança</li>
+              <li>Substituir a culpa pela conexão</li>
+              <li>Criar momentos reais de afeto todos os dias</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="transform__cta reveal">
+        <a href="https://pay.cakto.com.br/9k9np4x_928485" class="btn-cta">QUERO AJUDAR MEU FILHO</a>
+        <span class="cta-microcopy">Material digital em PDF • Ideal para 6 a 12 anos</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="emotional-section">
+    <div class="container">
+      <div class="emotional__card reveal">
+        <h2 class="section-title">Aqui, o afeto vem antes do diagnóstico.</h2>
+        <p class="emotional__text">
+          No Ancorar Kids, seu filho não é rotulado, não é comparado, não é "consertado". Ele é acolhido.
+          As atividades não existem para corrigir quem ele é — existem para ajudá-lo a se entender, se
+          expressar, se aceitar e se fortalecer. Porque toda criança merece o Ancorar Kids. E o seu filho
+          merece o dele.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container container--wide">
+      <h2 class="section-title reveal">O que muda quando você cuida da saúde emocional do seu filho?</h2>
+
+      <div class="comparison__cols">
+        <div class="comparison__col comparison__col--sem reveal" style="--d:.06s">
+          <div class="comparison__col-header">❌ SEM o Ancorar Kids</div>
+          <ul>
+            <li>Emoções que viram explosão ou silêncio</li>
+            <li>Comunicação difícil ou ausente</li>
+            <li>Frustração diante de qualquer desafio</li>
+            <li>O pensamento "eu não consigo"</li>
+          </ul>
+        </div>
+        <div class="comparison__col comparison__col--com reveal" style="--d:.14s">
+          <div class="comparison__col-header">✅ COM o Ancorar Kids</div>
+          <ul>
+            <li>Emoções com nome e espaço para existir</li>
+            <li>Conversas que aproximam</li>
+            <li>Mais calma para tentar de novo</li>
+            <li>A certeza de "eu sou capaz"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="comparison__cta reveal">
+        <a href="https://pay.cakto.com.br/9k9np4x_928485" class="btn-cta">QUERO O ANCORAR KIDS</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contents" id="conteudo">
+    <div class="container">
+      <h2 class="section-title reveal">Veja algumas das +30 ferramentas que você vai receber:</h2>
+
+      <div class="contents__grid">
+        <div class="contents__item reveal" style="--d:.02s">Tudo Sobre Mim</div>
+        <div class="contents__item reveal" style="--d:.05s">Como Eu Me Sinto Hoje</div>
+        <div class="contents__item reveal" style="--d:.08s">Termômetro das Emoções</div>
+        <div class="contents__item reveal" style="--d:.11s">Quando a Raiva Chega</div>
+        <div class="contents__item reveal" style="--d:.14s">Meu Cantinho da Calma</div>
+        <div class="contents__item reveal" style="--d:.17s">Pessoas em Quem Confio</div>
+        <div class="contents__item reveal" style="--d:.20s">O Que Me Ajuda?</div>
+        <div class="contents__item reveal" style="--d:.23s">Pensamentos e Sentimentos</div>
+        <div class="contents__item reveal" style="--d:.26s">Mentalidade de Crescimento</div>
+        <div class="contents__item reveal" style="--d:.29s">Meu Pote de Autoestima</div>
+        <div class="contents__item reveal" style="--d:.32s">Eu Sou Capaz</div>
+        <div class="contents__item reveal" style="--d:.35s">Palavras do Coração</div>
+        <div class="contents__item reveal" style="--d:.38s">Árvore da Gratidão</div>
+        <div class="contents__item reveal" style="--d:.41s">Meu Diário do Dia</div>
+      </div>
+
+      <div class="carousel reveal" id="pagesCarousel">
+        <div class="carousel__track" id="carouselTrack">
+          <div class="carousel__slide"><img src="images/pagina1.png" alt="Página 1"></div>
+          <div class="carousel__slide"><img src="images/pagina2.png" alt="Página 2"></div>
+          <div class="carousel__slide"><img src="images/pagina3.png" alt="Página 3"></div>
+          <div class="carousel__slide"><img src="images/pagina4.png" alt="Página 4"></div>
+          <div class="carousel__slide"><img src="images/pagina5.png" alt="Página 5"></div>
+          <div class="carousel__slide"><img src="images/pagina6.png" alt="Página 6"></div>
+          <div class="carousel__slide"><img src="images/pagina7.png" alt="Página 7"></div>
+        </div>
+        <div class="carousel__controls">
+          <button class="carousel__btn" id="prevBtn" aria-label="Anterior">←</button>
+          <div class="carousel__dots" id="carouselDots"><span class="carousel__dot active"></span><span class="carousel__dot"></span><span class="carousel__dot"></span></div>
+          <button class="carousel__btn" id="nextBtn" aria-label="Próximo">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bonus">
+    <div class="container">
+      <h2 class="section-title reveal">Comprando hoje, você ganha um bônus especial:</h2>
+
+      <div class="bonus__card reveal">
+        <span class="bonus__tag">🎁 Bônus Exclusivo</span>
+        <h3 class="bonus__name">Cards de Conexão</h3>
+        <p class="bonus__text">
+          52 perguntas leves e acolhedoras para puxar conversas que aproximam. Perfeitos para o jantar,
+          o caminho da escola ou a hora de dormir — momentos simples que viram memórias e fortalecem o
+          vínculo e a socialização da criança.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <div class="container container--wide">
+      <h2 class="section-title reveal">O que as famílias estão dizendo</h2>
+
+      <div class="reviews__carousel reveal">
+        <div class="reviews__track" id="reviewsTrack">
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Minha filha tem autismo e nunca conseguia dizer o que sentia. Com o termômetro das emoções ela começou a apontar o que estava sentindo. As crises diminuíram muito."</p><span class="review-card__author">Ana Paula M. — mãe da Lara, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho tem TDAH e a concentração dele em qualquer coisa era zero. As atividades são curtas e lúdicas, ele pede para fazer todo dia. Nunca vi isso antes."</p><span class="review-card__author">Renata S. — mãe do Pedro, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Comprei sem muita expectativa e me surpreendi. Em duas semanas meu filho já conseguia dizer 'estou com raiva' em vez de jogar as coisas no chão."</p><span class="review-card__author">Camila F. — mãe do Rafael, 7 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"O material é lindo e muito bem pensado. Minha filha com TEA adora as atividades de colorir enquanto processa as emoções. É realmente diferente de tudo que tentei."</p><span class="review-card__author">Fernanda L. — mãe da Sofia, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Já tentei de tudo para ajudar meu filho nas crises. O Ancorar Kids foi o único material que ele topou usar de bom grado. Os 5 minutos por dia fazem diferença real."</p><span class="review-card__author">Juliana R. — mãe do Theo, 11 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Choramos juntas preenchendo a atividade 'Pessoas em Quem Confio'. Nunca imaginei que minha filha me colocaria como a primeira da lista. Obrigada por esse material."</p><span class="review-card__author">Patrícia N. — mãe da Isabela, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho tem hipersensibilidade sensorial e qualquer coisa virava choro. Depois de um mês com o kit ele já consegue identificar o gatilho antes de explodir."</p><span class="review-card__author">Beatriz C. — mãe do Guilherme, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Comprei para minha filha de 6 anos e ela fica esperando o momento do dia em que a gente senta juntas para fazer. Criou um ritual lindo entre nós duas."</p><span class="review-card__author">Mariana T. — mãe da Valentina, 6 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A psicopedagoga da escola do meu filho perguntou o que eu tinha feito de diferente. Ele estava se comunicando melhor, pedindo ajuda em vez de surtar. É o Ancorar Kids."</p><span class="review-card__author">Aline P. — mãe do Lucas, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Vale cada centavo. Gastei muito mais com terapias que não engajavam meu filho. Ele faz as atividades sorrindo e eu vejo a evolução semana a semana."</p><span class="review-card__author">Tatiane B. — mãe do Davi, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Minha filha tem dislexia e processamento auditivo central. O fato de ser visual e colorido fez toda a diferença. Ela entende as atividades sem precisar de ajuda."</p><span class="review-card__author">Carla M. — mãe da Manuela, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Fiz com meu filho de 11 anos que nunca quis 'papo de sentimento'. Ele achou que era brincadeira. Hoje me conta coisas que nunca imaginou compartilhar."</p><span class="review-card__author">Luciana A. — mãe do Gabriel, 11 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"O Cantinho da Calma que montamos juntos baseado no material virou o lugar favorito do meu filho em momentos de crise. Ele vai lá sozinho agora."</p><span class="review-card__author">Simone V. — mãe do Mateus, 7 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Recomendo para toda mãe atípica. A gente se sente tão sozinha nessa jornada. Esse material foi feito com muito cuidado e a diferença na minha filha é visível."</p><span class="review-card__author">Daniela O. — mãe da Clara, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho de 7 anos com TDAH impulsivo parou de bater quando fica com raiva. Ele aprendeu a ir ao cantinho e respirar. Eu mal acredito ainda."</p><span class="review-card__author">Priscila G. — mãe do Arthur, 7 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A atividade do Termômetro das Emoções virou rotina aqui em casa. Toda manhã meu filho marca como está se sentindo e a gente já sabe como vai ser o dia."</p><span class="review-card__author">Roberta H. — mãe do Henrique, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Minha filha com TEA nível 1 tem muita dificuldade com mudanças de rotina. As atividades de mentalidade de crescimento ajudaram ela a lidar melhor com imprevistos."</p><span class="review-card__author">Vanessa K. — mãe da Maria Eduarda, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Simples, acessível e transformador. Três palavras para o Ancorar Kids. Meu filho sorri quando vê o material. Isso já diz tudo."</p><span class="review-card__author">Cristiane L. — mãe do João Pedro, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Estávamos há meses sem conseguir ter uma conversa tranquila com nossa filha. O Ancorar Kids abriu uma porta que parecia fechada para sempre."</p><span class="review-card__author">Amanda W. — mãe da Letícia, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Imprimimos e montamos uma pasta linda. Minha filha chama de 'o livro dos sentimentos dela'. Ela cuida com tanto carinho. Me emociono só de ver."</p><span class="review-card__author">Natália S. — mãe da Ana Luísa, 7 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho tem ansiedade severa e as técnicas de respiração e calma do material foram um divisor de águas. Ele agora consegue se regular sozinho em muitas situações."</p><span class="review-card__author">Elaine R. — mãe do Cauã, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Sou terapeuta ocupacional e recomendo o Ancorar Kids para as famílias que atendo. O material complementa muito bem o trabalho terapêutico em casa."</p><span class="review-card__author">Dra. Fernanda Q. — terapeuta ocupacional</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho de 12 anos resistia a qualquer coisa que parecesse 'terapia'. O Ancorar Kids não parece. Parece um diário legal. Ele topou na hora."</p><span class="review-card__author">Cláudia M. — mãe do Nicolas, 12 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A atividade de autoestima fez minha filha escrever coisas boas sobre ela mesma pela primeira vez. Ela lê toda semana quando está triste. Isso não tem preço."</p><span class="review-card__author">Adriana F. — mãe da Júlia, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Comprei para meu filho com TDAH e acabei fazendo as atividades junto com ele. Aprendi muito sobre ele e sobre mim mesma. Recomendo de coração."</p><span class="review-card__author">Mônica T. — mãe do Felipe, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Minha filha tem sensibilidade emocional extrema, chora por tudo. Com o material ela aprendeu a nomear e validar as emoções. As crises de choro reduziram pela metade."</p><span class="review-card__author">Sabrina C. — mãe da Alice, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"O material chegou num momento em que eu estava completamente esgotada. Fazer as atividades com meu filho me reconectou com ele de um jeito que eu não esperava."</p><span class="review-card__author">Raquel B. — mãe do Eduardo, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho autista tem dificuldade com contato visual e conversas diretas. Fazer as atividades no papel foi a forma perfeita de ele se abrir sem pressão."</p><span class="review-card__author">Jéssica P. — mãe do Samuel, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Sou pai solo e não sabia como abordar os sentimentos com minha filha. O Ancorar Kids me deu o caminho. Agora temos uma conversa boa todo dia."</p><span class="review-card__author">Roberto A. — pai da Bianca, 7 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A terapeuta da minha filha ficou impressionada com o vocabulário emocional que ela desenvolveu em poucas semanas. O Ancorar Kids foi a única novidade que introduzimos."</p><span class="review-card__author">Larissa D. — mãe da Cecília, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho tem TOC e ansiedade. O Pote de Autoestima dele está cheio de papéis com coisas boas que ele mesmo escreveu. Nos dias ruins ele abre e lê. Funciona."</p><span class="review-card__author">Viviane N. — mãe do Lorenzo, 11 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Nunca um material foi tão bem aceito pela minha filha com TEA. Ela é muito resistente a novidades, mas o Ancorar Kids ela pediu para fazer no mesmo dia."</p><span class="review-card__author">Tânia R. — mãe da Heloísa, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Os Cards de Conexão do bônus são incríveis. No jantar colocamos um card na mesa e a conversa flui naturalmente. Meu filho fala coisas que nunca imaginei ouvir."</p><span class="review-card__author">Marcia E. — mãe do Antônio, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Imprimi duas vezes porque minha filha preencheu tudo e quis começar de novo. Diz que é o livro favorito dela. Meu coração não cabe de alegria."</p><span class="review-card__author">Letícia M. — mãe da Giovanna, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho tem dificuldade de socialização e as atividades sobre confiança e vínculos ajudaram muito nas conversas com ele sobre amizades. Resultado visível na escola."</p><span class="review-card__author">Patrícia O. — mãe do Vinícius, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Sou psicóloga e fiquei impressionada com a qualidade técnica do material. É baseado em evidências e apresentado de forma acessível. Recomendo para todas as famílias."</p><span class="review-card__author">Dra. Carolina Z. — psicóloga infantil</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A minha filha com TDA tem muita dificuldade de reconhecer quando está no limite. O termômetro das emoções foi exatamente o que faltava para ela visualizar isso."</p><span class="review-card__author">Sandra F. — mãe da Laura, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Comprei com um pouco de desconfiança porque já tentei muito coisa. Mas o Ancorar Kids é diferente. É simples do jeito certo. Meu filho de 6 anos ama."</p><span class="review-card__author">Érica V. — mãe do Bernardo, 6 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A Árvore da Gratidão virou tradição de domingo aqui. Toda semana meu filho escreve uma coisa nova. Ele está mais positivo e menos focado no que dá errado."</p><span class="review-card__author">Juliana C. — mãe do Miguel, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho tem síndrome de Asperger e muita dificuldade de empatia. As atividades sobre sentimentos ajudaram ele a entender como os outros se sentem também."</p><span class="review-card__author">Andréa S. — mãe do Isaac, 11 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Estava tão cansada de me sentir impotente diante das crises do meu filho. O Ancorar Kids me deu ferramentas concretas. Hoje eu sei o que fazer."</p><span class="review-card__author">Denise L. — mãe do Enzo, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Minha filha de 12 anos disse que o Ancorar Kids a ajuda a entender por que fica tão nervosa às vezes. Para uma pré-adolescente neurodivergente isso é enorme."</p><span class="review-card__author">Flávia R. — mãe da Melissa, 12 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Usamos o material em grupo terapêutico com crianças autistas. O engajamento foi incrível. As crianças queriam levar as páginas para casa para mostrar para os pais."</p><span class="review-card__author">Luciana B. — fonoaudióloga</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho não gosta de escrever por causa da dislexia. Mas como tem muito desenho e cores no Ancorar Kids, ele participa sem reclamar. Foi a solução que faltava."</p><span class="review-card__author">Kátia M. — mãe do Ryan, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Três semanas usando e minha filha já consegue dizer 'estou com a emoção vermelha' quando vai entrar em colapso. Isso nos dá tempo de agir antes da crise."</p><span class="review-card__author">Cíntia P. — mãe da Rebeca, 7 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho autista tem rituais rígidos. Conseguimos inserir o Ancorar Kids na rotina dele de forma natural. Hoje é ele quem lembra que é hora de fazer."</p><span class="review-card__author">Bianca F. — mãe do Cauê, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Valeu muito mais do que o preço. Minha filha passou a pedir desculpas depois de uma crise pela primeira vez. Ela disse 'eu estava com a emoção vermelha, mãe'."</p><span class="review-card__author">Tatiana C. — mãe da Isadora, 8 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"O Ancorar Kids chegou na semana mais difícil da nossa jornada. Deu esperança quando eu precisava. E resultado de verdade quando eu precisava mais ainda."</p><span class="review-card__author">Gabriela A. — mãe do Caio, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Compartilhei com o grupo de mães atípicas que participo e em dois dias mais de 20 mães compraram. Todas voltaram para agradecer. Material transformador."</p><span class="review-card__author">Renata O. — mãe do Thiago, 10 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"Meu filho com TDAH e TEA tinha dificuldade enorme em iniciar qualquer atividade. O formato do Ancorar Kids, curto e visual, foi perfeito para o perfil dele."</p><span class="review-card__author">Alessandra N. — mãe do Pietro, 9 anos</span></div>
+
+          <div class="review-card"><div class="review-card__stars">★★★★★</div><p class="review-card__text">"A cada semana minha filha evolui um pouco. Não é milagre, é consistência. O Ancorar Kids nos deu a estrutura para isso. Gratidão enorme."</p><span class="review-card__author">Luciane T. — mãe da Antonella, 8 anos</span></div>
+
+        </div>
+      </div>
+
+      <div class="reviews__controls">
+        <button class="reviews__btn" id="reviewsPrev" aria-label="Anterior">←</button>
+        <div class="reviews__dots" id="reviewsDots"><span class="reviews__dot active"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span><span class="reviews__dot"></span></div>
+        <button class="reviews__btn" id="reviewsNext" aria-label="Próximo">→</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="offer">
+    <div class="offer__blob offer__blob--1" aria-hidden="true"></div>
+    <div class="offer__blob offer__blob--2" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="offer__card reveal">
+        <h2 class="section-title">Tudo o que você recebe hoje:</h2>
+
+        <ul class="offer__checklist">
+          <li><span class="check">✓</span><span>Kit Ancorar Kids com +30 atividades guiadas (42 páginas)</span></li>
+          <li><span class="check">✓</span><span>Bônus: Cards de Conexão (52 perguntas)</span></li>
+          <li><span class="check">✓</span><span>Acesso imediato e vitalício</span></li>
+          <li><span class="check">✓</span><span>Formato 100% digital em PDF, pronto para imprimir</span></li>
+        </ul>
+
+        <p class="offer__anchor">
+          Tudo isso deveria custar mais de <s>R$297,00</s>. Mas hoje, nesta oferta especial,
+          seu investimento é de apenas:
+        </p>
+
+        <span class="offer__urgency">⏰ OFERTA ESPECIAL POR TEMPO LIMITADO</span>
+
+        <p class="offer__price">6x de R$8,99</p>
+        <p class="offer__price-alt">ou <strong>R$47,90 à vista</strong></p>
+
+        <a href="https://pay.cakto.com.br/9k9np4x_928485" class="btn-cta btn-cta--full">QUERO O ANCORAR KIDS</a>
+        <span class="cta-microcopy">Pagamento 100% seguro • Acesso imediato após a confirmação</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="guarantee__inner reveal">
+        <div class="guarantee__badge-placeholder">
+          Garantia<br>7 dias
+        </div>
+
+        <div>
+          <h2 class="guarantee__title">Risco zero por 7 dias</h2>
+          <p class="guarantee__text">
+            Aplique as atividades com seu filho por 7 dias. Se por qualquer motivo você sentir que o
+            material não trouxe nenhum benefício, basta enviar uma mensagem e devolvemos 100% do seu
+            dinheiro. Sem perguntas, sem burocracia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title reveal">Perguntas frequentes</h2>
+
+      <div class="faq__list">
+        <div class="faq__item reveal" style="--d:.04s">
+          <button class="faq__q" aria-expanded="false" aria-controls="faq-1">
+            O material é físico ou digital?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-1">
+            <div class="faq__answer-inner">
+              100% digital em PDF. Você recebe o acesso no seu e-mail imediatamente após a compra e
+              pode imprimir quantas vezes quiser.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--d:.08s">
+          <button class="faq__q" aria-expanded="false" aria-controls="faq-2">
+            Funciona para qual idade?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-2">
+            <div class="faq__answer-inner">
+              As atividades foram pensadas para crianças de 6 a 12 anos, e podem ser adaptadas
+              conforme o ritmo de cada criança.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--d:.12s">
+          <button class="faq__q" aria-expanded="false" aria-controls="faq-3">
+            Meu filho ainda não tem diagnóstico fechado. Serve para ele?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-3">
+            <div class="faq__answer-inner">
+              Sim! As atividades desenvolvem habilidades emocionais valiosas para qualquer criança
+              — com ou sem diagnóstico.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--d:.16s">
+          <button class="faq__q" aria-expanded="false" aria-controls="faq-4">
+            Preciso de conhecimento em psicologia para aplicar?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-4">
+            <div class="faq__answer-inner">
+              Não. Cada atividade vem com orientações simples e diretas. Se surgir qualquer dúvida,
+              nossa equipe de suporte te ajuda pelo e-mail.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--d:.20s">
+          <button class="faq__q" aria-expanded="false" aria-controls="faq-5">
+            Como funciona a garantia?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-5">
+            <div class="faq__answer-inner">
+              Você tem 7 dias para testar. Se não gostar, devolvemos 100% do valor.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item reveal" style="--d:.24s">
+          <button class="faq__q" aria-expanded="false" aria-controls="faq-6">
+            Quais as formas de pagamento?
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-6">
+            <div class="faq__answer-inner">
+              PIX, cartão de crédito (em até 6x) e boleto, em ambiente 100% seguro.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="footer__brand">Ancorar Kids</p>
+
+      <p class="footer__about">
+        Acreditamos que toda criança, independente de diagnóstico, merece se sentir compreendida,
+        segura e amada. Por isso criamos materiais que transformam o desenvolvimento emocional em
+        momentos de conexão, leveza e afeto.
+      </p>
+
+      <div class="footer__links">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+      </div>
+
+      <p class="footer__copyright">
+        © 2025 Ancorar Kids — Diário de Emoções da Criança Atípica. Todos os direitos reservados.
+      </p>
+
+      <p class="footer__disclaimer">
+        Este material tem caráter educativo e não substitui acompanhamento profissional de
+        psicólogos, terapeutas ou médicos.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const revealObserver = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); }
+      }),
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    (function () {
+      const track   = document.getElementById('reviewsTrack');
+      const slides  = track ? track.querySelectorAll('.review-card') : [];
+      const dotsEl  = document.getElementById('reviewsDots');
+      const prevBtn = document.getElementById('reviewsPrev');
+      const nextBtn = document.getElementById('reviewsNext');
+      if (!track || !slides.length) return;
+
+      function visibleCount() {
+        return window.innerWidth <= 440 ? 1 : window.innerWidth <= 680 ? 2 : 3;
+      }
+
+      let current = 0;
+      let timer;
+      const totalSteps = () => Math.ceil(slides.length / visibleCount());
+
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < totalSteps(); i++) {
+          const d = document.createElement('span');
+          d.className = 'reviews__dot' + (i === current ? ' active' : '');
+          d.addEventListener('click', () => goTo(i));
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function goTo(index) {
+        current = ((index % totalSteps()) + totalSteps()) % totalSteps();
+        const slideWidth = slides[0].offsetWidth + 16;
+        track.style.transform = `translateX(-${current * visibleCount() * slideWidth}px)`;
+        dotsEl.querySelectorAll('.reviews__dot').forEach((d, i) =>
+          d.classList.toggle('active', i === current));
+      }
+
+      function startAuto() {
+        timer = setInterval(() => goTo(current + 1), 4000);
+      }
+
+      function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+      }
+
+      let touchStartX = 0;
+      track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
+      }, { passive: true });
+
+      prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+      nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+      window.addEventListener('resize', () => { buildDots(); goTo(0); });
+      buildDots();
+      startAuto();
+    })();
+
+    (function () {
+      const track   = document.getElementById('carouselTrack');
+      const slides  = track ? track.querySelectorAll('.carousel__slide') : [];
+      const dotsEl  = document.getElementById('carouselDots');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      if (!track || !slides.length) return;
+
+      function visibleCount() {
+        return window.innerWidth <= 400 ? 1 : window.innerWidth <= 640 ? 2 : 3;
+      }
+
+      let current = 0;
+      let timer;
+      const totalSteps = () => Math.ceil(slides.length / visibleCount());
+
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < totalSteps(); i++) {
+          const d = document.createElement('span');
+          d.className = 'carousel__dot' + (i === current ? ' active' : '');
+          d.addEventListener('click', () => goTo(i));
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function goTo(index) {
+        current = ((index % totalSteps()) + totalSteps()) % totalSteps();
+        const slideWidth = slides[0].offsetWidth + 16;
+        track.style.transform = `translateX(-${current * visibleCount() * slideWidth}px)`;
+        dotsEl.querySelectorAll('.carousel__dot').forEach((d, i) =>
+          d.classList.toggle('active', i === current));
+      }
+
+      function startAuto() {
+        timer = setInterval(() => goTo(current + 1), 4000);
+      }
+
+      function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+      }
+
+      let touchStartX = 0;
+      track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
+      }, { passive: true });
+
+      prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+      nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+      window.addEventListener('resize', () => { buildDots(); goTo(0); });
+      buildDots();
+      startAuto();
+    })();
+
+    document.querySelectorAll('.faq__q').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const open     = this.getAttribute('aria-expanded') === 'true';
+        const answerId = this.getAttribute('aria-controls');
+        const answer   = document.getElementById(answerId);
+
+        document.querySelectorAll('.faq__q').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          const a = document.getElementById(b.getAttribute('aria-controls'));
+          if (a) a.style.maxHeight = '0';
+        });
+
+        if (!open) {
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+
+
+
+</body></html>
